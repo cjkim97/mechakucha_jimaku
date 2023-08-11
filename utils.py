@@ -1,9 +1,11 @@
 import streamlit as st
 from PIL import Image
 from io import BytesIO
+import pandas as pd
 import base64
 
 # 이미지 불러오기
+@st.cache_data
 def get_image_base64(img_path):
     image = Image.open(img_path)
     buffered = BytesIO()
@@ -17,7 +19,8 @@ def set_background_main():
     st.set_page_config(
         page_title="Mecha_Jimaku",
         page_icon=FAV,
-        layout="wide"
+        layout="wide",
+        # initial_sidebar_state='expanded'
     )
 
     st.markdown(f'''
@@ -25,25 +28,27 @@ def set_background_main():
                 /* 웹폰트 불러오기 */
                 @import url('http://www.openhiun.com/hangul/nanumbarungothic.css');
                 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
-
                 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
-
                 .nanumpenscript * {{
                 font-family: 'Nanum Pen Script', cursive;
                 }}
-                /* app_view 컨테이너 수정하기 */
-                [data-testid="stAppViewContainer"] > section:nth-child(2) > div:nth-child(1) {{
-                    padding-top : 3rem !important;
+                @font-face{{
+                    font-family: 'InkLipquid';
+                    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
+                    font-weight: normal;
+                    font-style: normal;
                 }}
 
-                /* sidebar 수정하기 */
-                [data-testid="stSidebar"] {{
-                    width : 10% !important;
+
+                /* app_view 컨테이너 수정하기 */
+                [data-testid="stAppViewContainer"] > section:nth-child(2) > div:nth-child(1) {{
+                    padding-top : 10vw !important;
+                    padding-bottom : 10vw !important;
                 }}
 
                 /*header 수정하기 */
                 header {{
-                    visibility : hidden;
+                    display : none !important;
                 }} 
 
                 /* footer 꾸미기 */
@@ -52,10 +57,12 @@ def set_background_main():
                     background: #2D5AF0;
                     font-family : "Nanumsquare";
                     color : #2D5AF0 !important;
+                    padding-left : 0 !important;
+                    z-index : 9999;
                 }}
             
                 footer a {{
-                    visibility: hidden;
+                    display : none;
                 }}
                 footer:after {{
                     visibility: visible; 
@@ -64,5 +71,23 @@ def set_background_main():
                     font-size: 15px;
                     color: #FFFFFF;
                     align-self : center;
+                    height : 2vw !important;
                 }}
             </style>''',unsafe_allow_html=True)
+    
+
+@st.cache_resource
+def set_sidebar():
+    st.markdown(f'''
+                <style> 
+                    /* sidebar 수정하기 */
+                    # [data-testid="stSidebar"] {{
+                    #     display : none;
+                    # }}
+                    # [data-testid="stSidebar"] > div {{
+                    #     display : none;
+                    # }}
+                    [data-testid="stSidebar"] {{
+                        z-index : 1 !important;
+                    }}
+                </style>''', unsafe_allow_html=True)

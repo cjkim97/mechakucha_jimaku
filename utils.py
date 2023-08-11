@@ -97,7 +97,8 @@ def set_sidebar():
                     }}
                     [data-testid="stSidebar"] ul {{
                         padding-top : 15rem;
-                        max-height : 50vh !important;
+                        max-height : 100vh !important;
+                        height : 90vh !important;
                         # border : hidden;
                         border-bottom-style : none;
                     }}

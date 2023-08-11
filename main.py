@@ -3,11 +3,14 @@ import pandas as pd
 import os
 from datetime import datetime
 
-from utils import set_background_main
+from utils import set_background_main, set_sidebar
 from utils import get_image_base64
 
 # 기본 배경 설정
 set_background_main()
+
+# sidebar 설정
+set_sidebar()
 
 # 초기값 설정
 # TODAY_DATE = str(datetime.today().year) + str(datetime.today().month).zfill(2) + str(datetime.today().day).zfill(2)
@@ -25,10 +28,11 @@ st.markdown(f'''
                     align-items : center;
                 }}
                 #title_name{{
-                    font-family: 'Nanum Pen Script';
+                    font-family: "InkLipquid";
                     font-size : 5vw;
                     white-space : nowrap;
-                    margin-bottom : -2vw;
+                    margin-bottom : -1.5vw;
+                    font-weight : 700;
                 }}
                 /* 메인 메뉴 관련 */
                 .Main_menu {{
@@ -59,17 +63,27 @@ st.markdown(f'''
                     text-align : center;
                     margin-bottom : 0;
                     margin-top : 0;
-                    font-family : 'Nanumsquare';
                     font-weight : 700;
                     color : #808080;
-                    font-size : 1.5vw;
+                    font-size : 1.25vw;
+                    font-family : 'Nanumsquare';
                 }}
                 /* 메인 링크관련 */
+                .Main_link_menu_name p {{
+                    white-space : nowrap;
+                    text-align : center;
+                    margin-bottom : 0;
+                    margin-top : 0;
+                    font-family : 'Nanumsquare';
+                    font-weight : 700;
+                    color : #000000;
+                    font-size : 1.5vw;
+                    margin-top : 2vw;
+                }}
                 .Main_link {{
                     display : flex;
                     justify-content : center;
                     gap : 1rem;
-                    margin-top : 1vw;
                 }}
                 .Main_link > a > img{{
                     width : 3vw ;
@@ -98,13 +112,19 @@ st.markdown(f'''
             </div>''', unsafe_allow_html=True )
 
 # 주요 공지사항
+# st.markdown(f'''
+#             <div class = "Main_notice">
+#                 <p> 📌 상업적 이용 금지 📌 </p>
+#                 <p> 📌 출처 삭제 금지 및 배포 지양 📌 </p>
+#                 <p> 📌 의역/오역/맞춤법 오류 겁나 많음 📌 </p>
+#                 <p> 📌 자막 싱크는 대부분 TVER(추출) 기준 📌 </p>
+#                 <p> 📌 그저 공부용이니 허접해도 양해부탁드립니다 :) 📌 </p>
+#             </div>''', unsafe_allow_html=True)
 st.markdown(f'''
-            <div class = "Main_notice">
-                <p> 📌 상업적 이용 금지 📌 </p>
-                <p> 📌 출처 삭제 금지 및 배포 지양 📌 </p>
-                <p> 📌 의역/오역/맞춤법 오류 겁나 많음 📌 </p>
-                <p> 📌 자막 싱크는 대부분 TVER(추출) 기준 📌 </p>
-                <p> 📌 그저 공부용이니 허접해도 양해부탁드립니다 :) 📌 </p>
+            <div class = "Main_notice"> 
+                <p> 🤗 뭐든 재밌게 공부하는 거 좋아하는 편 🤗</p>
+                <p style='font-size : 0.75vw;'> ※ PC 사용을 권장합니다 ※</p>
+                
             </div>''', unsafe_allow_html=True)
 
 # 주요 링크 아이콘
@@ -113,8 +133,11 @@ github_icon = get_image_base64('./static/icons/github.png')
 youtube_icon = get_image_base64('./static/icons/youtube.png')
 
 st.markdown(f'''
+            <div class = "Main_link_menu_name"> 
+                <p style='font-family: "InkLipquid";'> UgwayK's Info </p>
+            </div>
             <div class = "Main_link"> 
-                <a id = "blog_link" href="https://blog.naver.com/nuang0530_2" target="_blank">
+                <a id = "blog_link" href="https://blog.naver.com/PostList.naver?blogId=nuang0530_2&categoryNo=32&skinType=&skinId=&from=menu" target="_blank">
                     <img src="data:img\logo_char.jpg;base64,{naver_blog_icon}" title="잡덕의 세계♪"/>
                 </a>
                 <a id = "git_link" href="https://github.com/cjkim97/mechakucha_jimaku" target="_blank">

@@ -1,22 +1,19 @@
 # 현재 작업 중인 자막 목록이 보이는 곳
 import streamlit as st
 import base64
-import pandas as pd
 from datetime import datetime
-import os
+from glob import glob
 
-from utils import set_background_main
+from utils import set_background_main, set_sidebar, setting_session_state
 
 # 기본 배경 설정
 set_background_main()
 
 # # sidebar 설정
-# set_sidebar()
+set_sidebar()
 
 # 초기값 설정
-DATA_PATH = './static/data/'
-if 'CONTENT_INFO' not in st.session_state: # 자막 챌린지 기록 불러오기
-    st.session_state['CONTENT_INFO'] = pd.read_csv(DATA_PATH + os.listdir(DATA_PATH)[0])
+setting_session_state()
 
 # 요소 디자인
 st.markdown(f'''

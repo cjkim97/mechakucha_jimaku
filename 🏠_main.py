@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
-import os
-from datetime import datetime
+from glob import glob
 
 from utils import set_background_main, set_sidebar
 from utils import get_image_base64
+from utils import setting_session_state
 
 # 기본 배경 설정
 set_background_main()
@@ -13,10 +13,7 @@ set_background_main()
 set_sidebar()
 
 # 초기값 설정
-# TODAY_DATE = str(datetime.today().year) + str(datetime.today().month).zfill(2) + str(datetime.today().day).zfill(2)
-DATA_PATH = './static/data/'
-if 'CONTENT_INFO' not in st.session_state: # 자막 챌린지 기록 불러오기
-    st.session_state['CONTENT_INFO'] = pd.read_csv(DATA_PATH + os.listdir(DATA_PATH)[0])
+setting_session_state()
 
 # 요소 디자인
 st.markdown(f'''
@@ -32,7 +29,7 @@ st.markdown(f'''
                     font-family: "InkLipquid";
                     font-size : 5vw;
                     white-space : nowrap;
-                    margin-bottom : -1vw;
+                    # margin-bottom : -1vw;
                     font-weight : 700;
                     # text-shadow: 4px 5px 5px #D9D9D9;
                     # color : #FFFFFF;
@@ -47,7 +44,7 @@ st.markdown(f'''
                 }}
                 .Main_menu > a > img {{
                     width : 10vw;
-                    margin-bottom : -1vw;
+                    # margin-bottom : -1vw;
                     margin-top : -2vw;
                 }}
                 .Main_menu > a > img:hover {{
@@ -67,10 +64,10 @@ st.markdown(f'''
                     text-align : center;
                     margin-bottom : 0;
                     margin-top : 0;
-                    font-weight : 700;
+                    font-weight : 400;
                     color : #808080;
                     font-size : 1.25vw;
-                    font-family : 'Nanumsquare';
+                    font-family : 'Nanum Pen Script';
                 }}
                 /* 메인 링크관련 */
                 .Main_link_menu_name p {{
@@ -126,8 +123,8 @@ st.markdown(f'''
 #             </div>''', unsafe_allow_html=True)
 st.markdown(f'''
             <div class = "Main_notice"> 
-                <p> 🤗 뭐든 재밌게 공부하는 거 좋아하는 편 🤗</p>
-                <p style='font-size : 0.75vw;'> ※ PC 사용을 권장합니다 ※</p>
+                <p style='font-size : 0.75vw; font-family : "Nanumsquare"; '> ※ PC 사용을 권장합니다 ※</p>
+                <p> <br>공부용으로 만들었던 자막을 기록하는 장소이자,<br>끄적대며 만든 것도 남겨두는 곳</p>
                 
             </div>''', unsafe_allow_html=True)
 

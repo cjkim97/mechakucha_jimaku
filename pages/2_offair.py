@@ -32,13 +32,11 @@ st.markdown(f'''
                 .offair_content {{
                     display : flex;
                     flex-wrap : wrap;
-                    justify-content : space-start;
-                    margin-bottom : 3vw;
-                    # margin-top : 3vw;
-                    padding-left : 5vw;
-                    padding-right : 5vw;
-                    gap : 20px 10px;
-                    
+                    justify-content : center;
+                    margin-top : 3vw;
+                    padding-left : 3vw;
+                    padding-right : 3vw;
+                    gap : 40px 40px;                 
                 }}
                 .offair_content > a {{
                     text-decoration: none;
@@ -47,16 +45,17 @@ st.markdown(f'''
                     justify-content : space-between;
                 }}
                 .offair_content > a > img {{
-                    width : 400px;
-                    border-radius: 20px;
+                    width : 14vw;
+                    border-radius: 1vw;
+                    height : 9vw;
                 }}
                 .offair_content > a > p{{
                     text-align : center;
                     font-family : 'Nanumsquare';
                     color : #000000;
                     font-weight: 600;
-                    font-size : 1rem;
-
+                    font-size : 0.6vw;
+                     z-index : 99999;
                 }}
                 .offair_content > a:hover {{
                     transform : scale(1.05);
@@ -65,32 +64,57 @@ st.markdown(f'''
                 /* 정렬 버튼 디자인 */
                 [data-testid="stHorizontalBlock"] {{
                     gap : 0;
+                    padding-left : 32vw;
+                    padding-right : 32vw;
+                    display : flex;
+                    align-items : flex-end;
+                    justify-content : center;
+                    flex-basis: min-content;
+                }}
+                [class='row-widget stButton']{{
+                    display : flex;
+                    justify-content : center;
                 }}
                 [class='row-widget stButton'] > button{{
                     border-radius: 50px;
-                    background : #D9D9D9;
-                    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+                    background : #FFFFFF;
                     border : hidden;
+                    display : flex;
+                    align-items : flex-end;
                 }}
                 [class='row-widget stButton'] > button > div {{
-                    color : #FFFFFF;
+                    color : #989898;
+                    font-family : 'Nanumsquare';
+                }}
+                [class='row-widget stButton'] > button > div > p {{
+                    font-size : 1.5rem;
+                }}
+                [class='row-widget stButton'] > button > div:hover {{
+                    color : #000000;
+                    font-family : 'Nanumsquare';
                 }}
                 [class='row-widget stButton'] > button:hover {{
-                    background : #2D5AF0;
                     transform : scale(1.1);
                     transition : .5s;
                 }}
+                [class='row-widget stButton'] > button:active {{
+                    background : #FFFFFF;
+                }}
+                .css-1np2sqp{{
+                    width : 10px !important;
+                }}
+            
             </style>''',unsafe_allow_html=True)
 
 # 요소 노출
+
+## 최신순/과거순 정렬
 ## 페이지 타이틀
 st.markdown(f'''
             <div class="page_title">
                 <p> 🎉작업 종료된 작품들 </p> 
             </div>''', unsafe_allow_html=True)
-
-## 최신순/과거순 정렬
-sort1, sort2 = st.columns([1,25])
+sort1, sort2 = st.columns([1,1])
 NEW = sort1.button('최신순')
 OLD = sort2.button('과거순')
 ## 현재 작업 중인 작품 정보
@@ -115,10 +139,19 @@ for content in values:
     # 7 detail
     # 8 OTT
     # 9 maker
+    # 10 update_date
+    # 11 url
     content_id = content[0]
     content_kr = content[1]
     content_release_date = content[3]
     content_hashtag = content[4]
+    content_url = content[11]
+
+    # cache 가 더 오래 걸리는 이유는..?
+    # try :
+    #     thumbnail = get_image_base64(f'./static/images/{content_id}.jpg')
+    # except : # 이미지가 없을경우
+    #     thumbnail = get_image_base64(f'./static/images/basic.png')
 
     try : 
         with open(f'./static/images/{content_id}.jpg', 'rb') as f:
@@ -129,7 +162,7 @@ for content in values:
             thumbnail = f.read()
             thumbnail = (base64.b64encode(thumbnail).decode("utf-8"))
     
-    content_list_html.append(f"""<a id = {content_id} href='#' title={content_kr}><img src="data:image/gif;base64,{thumbnail}"> <p> {content_kr} </p> </a>""")
+    content_list_html.append(f"""<a id = {content_id} href='{content_url}' title={content_kr} target="_blank"><img src="data:image/gif;base64,{thumbnail}"> <p> {content_kr} </p> </a>""")
 
 ONAIR_HTML = f'''
             <div class = "offair_content"> 

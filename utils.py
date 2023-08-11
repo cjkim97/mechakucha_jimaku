@@ -38,12 +38,15 @@ def set_background_main():
                     font-weight: normal;
                     font-style: normal;
                 }}
-
+                /* vertical block */
+                [data-testid="stVerticalBlock"] {{
+                    gap : 0;
+                }}
 
                 /* app_view 컨테이너 수정하기 */
                 [data-testid="stAppViewContainer"] > section:nth-child(2) > div:nth-child(1) {{
-                    padding-top : 10vw !important;
-                    padding-bottom : 10vw !important;
+                    padding-top : 5vw !important;
+                    padding-bottom : 5vw !important;
                 }}
 
                 /*header 수정하기 */
@@ -72,6 +75,9 @@ def set_background_main():
                     color: #FFFFFF;
                     align-self : center;
                     height : 2vw !important;
+                }}
+                body {{
+                    font-family : 'Nanumsquare';
                 }}
             </style>''',unsafe_allow_html=True)
     

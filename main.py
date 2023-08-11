@@ -26,13 +26,17 @@ st.markdown(f'''
                     display : flex;
                     justify-content : center;
                     align-items : center;
+                    padding-top : 5rem;
                 }}
                 #title_name{{
                     font-family: "InkLipquid";
                     font-size : 5vw;
                     white-space : nowrap;
-                    margin-bottom : -1.5vw;
+                    margin-bottom : -1vw;
                     font-weight : 700;
+                    # text-shadow: 4px 5px 5px #D9D9D9;
+                    # color : #FFFFFF;
+                    # -webkit-text-stroke: 0.01vw #FECCBE;
                 }}
                 /* 메인 메뉴 관련 */
                 .Main_menu {{

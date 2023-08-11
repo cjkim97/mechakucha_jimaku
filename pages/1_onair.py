@@ -31,8 +31,8 @@ st.markdown(f'''
                 /*현재 작업 중인 작품 리스트 */
                 .onair_content {{
                     display : flex;
-                    margin-bottom : 3vw;
                     margin-top : 3vw;
+                    margin-bottom : 3vw;
                     padding-left : 5vw;
                     padding-right : 5vw;
                 }}
@@ -90,16 +90,19 @@ for content in ONAIR_DATA.values:
     # 7 detail
     # 8 OTT
     # 9 maker
+    # 10 update_date
+    # 11 url
     content_id = content[0]
     content_kr = content[1]
     content_release_date = content[3]
     content_hashtag = content[4]
+    content_url = content[11]
 
     with open(f'./static/images/{content_id}.gif', 'rb') as f:
         thumbnail = f.read()
         thumbnail = (base64.b64encode(thumbnail).decode("utf-8"))
     
-    content_list_html += f"""<a id = {content_id} href='#' title={content_kr}> 
+    content_list_html += f"""<a id = {content_id} href='{content_url}' title={content_kr} target="_blank"> 
     <img src="data:image/gif;base64,{thumbnail}"> <figcaption> {content_kr}/{content_release_date} </figcaption> </a>"""
 
 ONAIR_HTML = f'''
@@ -112,7 +115,7 @@ st.markdown(ONAIR_HTML, unsafe_allow_html=True)
 ### 최근 1주일 내 업데이트 내역만 반영하려고 함
 st.markdown(f'''
             <div class="page_title">
-                <p> 📌최근 업데이트 내역 </p> 
+                <p> 📌최근 업데이트 내역(추후 반영) </p> 
             </div>''', unsafe_allow_html=True)
 TODAY_DATE = str(datetime.today().year) + str(datetime.today().month).zfill(2) + str(datetime.today().day).zfill(2)
 st.markdown(f'''<div class="update_log">

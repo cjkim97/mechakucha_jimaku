@@ -5,6 +5,10 @@ import base64
 import pandas as pd
 import numpy as np
 from glob import glob
+from google.oauth2 import service_account
+from gsheetsdb import connect
+
+import pickle
 
 # 이미지 불러오기
 @st.cache_data
@@ -130,10 +134,31 @@ def set_sidebar():
                         <a href='/main' target="_self"><img id = "thumbnail" src="data:image/gif;base64,{thumbnail}"></a>
                     </div>''', unsafe_allow_html=True)
 
+# 구글 스프레드 시트 연동
+
 # 초기값 설정
 def setting_session_state():
-    if 'CONTENT_INFO' not in st.session_state: # 자막 챌린지 기록 불러오기
-        st.session_state['CONTENT_INFO'] = pd.read_csv(glob(r'./static/data/content_info_*')[0])
+    # 자막 챌린지 기록 불러오기
+    if 'CONTENT_INFO' not in st.session_state:
+        credentials = service_account.Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"],
+        scopes=["https://www.googleapis.com/auth/spreadsheets"]
+        )
+        conn = connect(credentials=credentials)
+
+        @st.cache_resource(ttl=600)
+        def run_query(query):
+            rows = conn.execute(query, headers=1)
+            rows = rows.fetchall()
+            return rows
+        sheet_url = st.secrets["private_gsheets_url"]
+        rows = run_query(f'SELECT * FROM "{sheet_url}"')
+
+        st.session_state['CONTENT_INFO'] = pd.DataFrame(rows)
+        
+
+    # if 'CONTENT_INFO' not in st.session_state: # 자막 챌린지 기록 불러오기
+    #     st.session_state['CONTENT_INFO'] = pd.read_csv(glob(r'./static/data/content_info_*')[0])
 
 # 예측 함수
 def recommend(target, user_size = 1, film_size = 122, hidden_size = 5, steps = 1000, learning_rate = 0.01, r_lambda = 0.01):

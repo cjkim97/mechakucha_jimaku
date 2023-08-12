@@ -12,9 +12,6 @@ set_background_main()
 # sidebar 설정
 set_sidebar()
 
-# 초기값 설정
-setting_session_state()
-
 # 요소 디자인
 st.markdown(f'''
             <style> 

@@ -1,7 +1,7 @@
 # 현재 작업 중인 자막 목록이 보이는 곳
 import streamlit as st
 import base64
-from datetime import datetime
+from datetime import datetime, timedelta
 from glob import glob
 
 from utils import set_background_main, set_sidebar, setting_session_state
@@ -55,7 +55,8 @@ st.markdown(f'''
                     background : #F2F2F2;
                     border-radius : 10px;
                     padding-left : 2vw;
-                    padding-top : 1vw;
+                    padding-right : 2vw;
+                    margin-top : 2vw;
                     height : 10vw;
                 }}
                 .update_log p{{
@@ -73,28 +74,17 @@ st.markdown(f'''
 
 ## 현재 작업 중인 작품 정보
 ONAIR_DATA = st.session_state.CONTENT_INFO[st.session_state['CONTENT_INFO']['onair']=='Y'].copy()
+RECENT_UPDATE = []
 
 ### 이미지 리스트 html화 하기
 content_list_html = ''
-for content in ONAIR_DATA.values:
-    # 0 content_id
-    # 1 content_kr
-    # 2 content_jp
-    # 3 release_date
-    # 4 hashtag
-    # 5 onair
-    # 6 is_full
-    # 7 detail
-    # 8 OTT
-    # 9 maker
-    # 10 update_date
-    # 11 url
-    content_id = content[0]
-    content_kr = content[1]
-    content_release_date = content[3]
-    content_hashtag = content[4]
-    content_url = content[11]
-
+for content in ONAIR_DATA[['content_id', 'content_kr', 'release_date', 'hashtag', 'url','update_date', 'last_episode']].values:
+    content_id, content_kr, content_release_date, content_hashtag, content_url, update_date, last_episode = content
+    y,m,d = update_date.split('.')
+    # 최근 1주일 내 업데이트인 경우 가져오기~
+    if datetime.today() - datetime(int(y), int(m), int(d)) < timedelta(days=7):
+        RECENT_UPDATE.append([content_kr, update_date, last_episode])
+    
     with open(f'./static/images/{content_id}.gif', 'rb') as f:
         thumbnail = f.read()
         thumbnail = (base64.b64encode(thumbnail).decode("utf-8"))
@@ -112,9 +102,16 @@ st.markdown(ONAIR_HTML, unsafe_allow_html=True)
 ### 최근 1주일 내 업데이트 내역만 반영하려고 함
 st.markdown(f'''
             <div class="page_title">
-                <p> 📌최근 업데이트 내역(추후 반영) </p> 
+                <p> 📌최근 업데이트 내역</p> 
             </div>''', unsafe_allow_html=True)
-TODAY_DATE = str(datetime.today().year) + str(datetime.today().month).zfill(2) + str(datetime.today().day).zfill(2)
-st.markdown(f'''<div class="update_log">
-                <p>230810  ·······  Unknown </p>
-            </div>''',unsafe_allow_html=True)
+
+update_log_html = ''
+for log in RECENT_UPDATE:
+    update_log_html += f'<p>{log[0]}  ·······  {log[1]} {log[2]}화 🆕<\p>'
+
+if update_log_html : 
+    recent_log = f'''<div class="update_log">{update_log_html}</div>'''
+else : 
+    recent_log = f'''<div class="update_log"></div>'''
+
+st.markdown(f'{recent_log}',unsafe_allow_html=True)

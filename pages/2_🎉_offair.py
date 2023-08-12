@@ -39,18 +39,19 @@ st.markdown(f'''
                     display : flex;
                     flex-direction : column;
                     justify-content : space-between;
+                    white-space : nowrap;
                 }}
                 .offair_content > a > img {{
-                    width : 14vw;
-                    border-radius: 1vw;
-                    height : 9vw;
+                    width : 20rem;
+                    border-radius: 1rem;
+                    height : 13rem;
                 }}
                 .offair_content > a > p{{
                     text-align : center;
                     font-family : 'Nanumsquare';
                     color : #000000;
                     font-weight: 600;
-                    font-size : 0.6vw;
+                    font-size : 1rem;
                      z-index : 99999;
                 }}
                 .offair_content > a:hover {{
@@ -60,8 +61,8 @@ st.markdown(f'''
                 /* 정렬 버튼 디자인 */
                 [data-testid="stHorizontalBlock"] {{
                     gap : 0;
-                    padding-left : 32vw;
-                    padding-right : 32vw;
+                    padding-left : 10rem;
+                    padding-right : 10rem;
                     display : flex;
                     align-items : flex-end;
                     justify-content : center;
@@ -72,7 +73,6 @@ st.markdown(f'''
                     justify-content : center;
                 }}
                 [class='row-widget stButton'] > button{{
-                    border-radius: 50px;
                     background : #FFFFFF;
                     border : hidden;
                     display : flex;
@@ -112,43 +112,19 @@ st.markdown(f'''
             </div>''', unsafe_allow_html=True)
 sort1, sort2 = st.columns([1,1])
 NEW = sort1.button('최신순')
-OLD = sort2.button('과거순')
+OLD = sort2.button('과거순') #default
 ## 현재 작업 중인 작품 정보
 OFFAIR_DATA = st.session_state.CONTENT_INFO[st.session_state['CONTENT_INFO']['onair']=='N'].copy()
-values = OFFAIR_DATA.values
-
+SORTED_DATA = OFFAIR_DATA
 ### 이미지 리스트 html화 하기
 content_list_html = []
 if NEW : 
-    values = OFFAIR_DATA.values[::-1]
-if OLD : 
-    values = OFFAIR_DATA.values
+    SORTED_DATA = OFFAIR_DATA.iloc[::-1,:]
 
-for content in values:
-    # 0 content_id
-    # 1 content_kr
-    # 2 content_jp
-    # 3 release_date
-    # 4 hashtag
-    # 5 onair
-    # 6 is_full
-    # 7 detail
-    # 8 OTT
-    # 9 maker
-    # 10 update_date
-    # 11 url
-    content_id = content[0]
-    content_kr = content[1]
-    content_release_date = content[3]
-    content_hashtag = content[4]
-    content_url = content[11]
+for content in SORTED_DATA[['content_id', 'content_kr', 'url']].values:
+    content_id, content_kr, content_url = content
 
-    # cache 가 더 오래 걸리는 이유는..?
-    # try :
-    #     thumbnail = get_image_base64(f'./static/images/{content_id}.jpg')
-    # except : # 이미지가 없을경우
-    #     thumbnail = get_image_base64(f'./static/images/basic.png')
-
+    content_name = content_kr.split('~')[0]
     try : 
         with open(f'./static/images/{content_id}.jpg', 'rb') as f:
             thumbnail = f.read()
@@ -158,7 +134,7 @@ for content in values:
             thumbnail = f.read()
             thumbnail = (base64.b64encode(thumbnail).decode("utf-8"))
     
-    content_list_html.append(f"""<a id = {content_id} href='{content_url}' title={content_kr} target="_blank"><img src="data:image/gif;base64,{thumbnail}"> <p> {content_kr} </p> </a>""")
+    content_list_html.append(f"""<a id = {content_id} href='{content_url}' title={content_kr} target="_blank"><img src="data:image/gif;base64,{thumbnail}"> <p> {content_name} </p> </a>""")
 
 ONAIR_HTML = f'''
             <div class = "offair_content"> 

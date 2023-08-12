@@ -12,6 +12,8 @@ set_background_main()
 # sidebar 설정
 set_sidebar()
 
+setting_session_state()
+
 
 # 요소 디자인
 st.markdown(f'''
@@ -22,6 +24,13 @@ st.markdown(f'''
                     justify-content : center;
                     align-items : center;
                     padding-top : 0;
+                }}
+                .Main_title span {{
+                    font-family : 'Nanumsquare';
+                    font-size : 2vw;
+                    font-weight : 700;
+                    white-space : nowrap;
+                    color : #808080;
                 }}
                 #title_name{{
                     font-family: "InkLipquid";
@@ -91,7 +100,7 @@ st.markdown(f'''
 # Maintitle
 st.markdown('''
             <div class = "Main_title">
-                <p id = "title_name"> 엉터리 자막 보관소 </p>
+                <p id = "title_name"> 엉터리 자막 보관소 </p><span>v0.2</span>
             </div>''', unsafe_allow_html=True)
 
 # 자막 메뉴로 이동

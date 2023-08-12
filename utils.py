@@ -23,7 +23,7 @@ def get_image_base64(img_path):
 def set_background_main():
     FAV = Image.open('./static/icons/favicon.png')
     st.set_page_config(
-        page_title="Mecha_Jimaku",
+        page_title="엉터리 자막 보관소",
         page_icon=FAV,
         layout="wide",
         initial_sidebar_state='collapsed'
@@ -43,6 +43,13 @@ def set_background_main():
                     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
                     font-weight: normal;
                     font-style: normal;
+                }}
+                /* 페이지 타이틀 */
+                .page_title p {{
+                    font-family: 'InkLipquid';
+                    font-size : 5vw;
+                    white-space : nowrap;
+                    font-weight : 700;
                 }}
                 /* vertical block */
                 [data-testid="stVerticalBlock"] {{
@@ -131,8 +138,6 @@ def set_sidebar():
                         <a href='/main' target="_self"><img id = "thumbnail" src="data:image/gif;base64,{thumbnail}"></a>
                     </div>''', unsafe_allow_html=True)
 
-# 구글 스프레드 시트 연동
-
 # 초기값 설정
 def setting_session_state():
     # 자막 챌린지 기록 불러오기
@@ -152,10 +157,10 @@ def setting_session_state():
         rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
         st.session_state['CONTENT_INFO'] = pd.DataFrame(rows)
-        
-
-    # if 'CONTENT_INFO' not in st.session_state: # 자막 챌린지 기록 불러오기
-    #     st.session_state['CONTENT_INFO'] = pd.read_csv(glob(r'./static/data/content_info_*')[0])
+    
+    # playground session state
+    if 'playground_page' not in st.session_state:
+        st.session_state['playground_page'] = 'playground_main'
 
 # 예측 함수
 def recommend(target, user_size = 1, film_size = 122, hidden_size = 5, steps = 1000, learning_rate = 0.01, r_lambda = 0.01):

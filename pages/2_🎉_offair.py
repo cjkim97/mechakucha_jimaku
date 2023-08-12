@@ -17,13 +17,6 @@ setting_session_state()
 # 요소 디자인
 st.markdown(f'''
             <style>
-                /* 페이지 타이틀 */
-                .page_title p {{
-                    font-family: 'InkLipquid';
-                    font-size : 72px;
-                    white-space : nowrap;
-                    font-weight : 700;
-                }}
                 /*현재 작업 완료된 작품 리스트 */
                 .offair_content {{
                     display : flex;
@@ -32,7 +25,7 @@ st.markdown(f'''
                     margin-top : 3vw;
                     padding-left : 3vw;
                     padding-right : 3vw;
-                    gap : 40px 40px;                 
+                    gap : 20px 20px;                 
                 }}
                 .offair_content > a {{
                     text-decoration: none;
@@ -42,9 +35,9 @@ st.markdown(f'''
                     white-space : nowrap;
                 }}
                 .offair_content > a > img {{
-                    width : 20rem;
+                    width : 15rem;
                     border-radius: 1rem;
-                    height : 13rem;
+                    height : 10rem;
                 }}
                 .offair_content > a > p{{
                     text-align : center;
@@ -61,8 +54,8 @@ st.markdown(f'''
                 /* 정렬 버튼 디자인 */
                 [data-testid="stHorizontalBlock"] {{
                     gap : 0;
-                    padding-left : 10rem;
-                    padding-right : 10rem;
+                    padding-left : 10vw;
+                    padding-right : 10vw;
                     display : flex;
                     align-items : flex-end;
                     justify-content : center;
@@ -83,7 +76,7 @@ st.markdown(f'''
                     font-family : 'Nanumsquare';
                 }}
                 [class='row-widget stButton'] > button > div > p {{
-                    font-size : 1.5rem;
+                    font-size : 1.5vw;
                 }}
                 [class='row-widget stButton'] > button > div:hover {{
                     color : #000000;

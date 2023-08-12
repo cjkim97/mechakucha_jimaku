@@ -18,17 +18,10 @@ setting_session_state()
 # 요소 디자인
 st.markdown(f'''
             <style>
-                /* 페이지 타이틀 */
-                .page_title p {{
-                    font-family: 'InkLipquid';
-                    font-size : 72px;
-                    white-space : nowrap;
-                    font-weight : 700;
-                }}
                 /*현재 작업 중인 작품 리스트 */
                 .onair_content {{
                     display : flex;
-                    margin-top : 3vw;
+                    margin-top : 1vw;
                     margin-bottom : 3vw;
                     padding-left : 5vw;
                     padding-right : 5vw;
@@ -37,30 +30,32 @@ st.markdown(f'''
                     text-decoration: none;
                 }}
                 .onair_content > a > img {{
-                    width : 400px;
+                    width : 15rem;
                     border-radius: 20px;
                 }}
                 .onair_content > a > figcaption{{
                     text-align : center;
                     font-family : 'Nanumsquare';
-                    color : #808080;
+                    color : #000000;
                     font-weight: 600;
+                    font-size : 1rem;
                 }}
                 .onair_content > a:hover {{
                     transform : scale(1.05);
                     transition : .5s;
                 }}
                 /* 최근 업데이트 내역 */
-                .update_log {{
+                .update_log {{              
                     background : #F2F2F2;
                     border-radius : 10px;
-                    padding-left : 2vw;
+                    margin-left : 5vw;
                     padding-right : 2vw;
-                    margin-top : 2vw;
-                    height : 10vw;
+                    margin-top : 1vw;
+                    height : 20vw;
+                    width : 80vw;
                 }}
                 .update_log p{{
-                    font-size : 1.5vw;
+                    font-size : 1rem;
                 }}
 
             </style>''',unsafe_allow_html=True)

@@ -26,7 +26,7 @@ def set_background_main():
         page_title="Mecha_Jimaku",
         page_icon=FAV,
         layout="wide",
-        initial_sidebar_state='expanded'
+        initial_sidebar_state='collapsed'
     )
 
     st.markdown(f'''
@@ -105,9 +105,6 @@ def set_sidebar():
                         height : 90vh !important;
                         # border : hidden;
                         border-bottom-style : none;
-                    }}
-                    [data-testid="stSidebar"] svg{{
-                        display : none;
                     }}
                     [data-testid="stSidebar"] span{{
                         font-size : 20px;

@@ -12,6 +12,7 @@ set_background_main()
 # sidebar 설정
 set_sidebar()
 
+
 # 요소 디자인
 st.markdown(f'''
             <style> 
@@ -20,17 +21,14 @@ st.markdown(f'''
                     display : flex;
                     justify-content : center;
                     align-items : center;
-                    padding-top : 5rem;
+                    padding-top : 0;
                 }}
                 #title_name{{
                     font-family: "InkLipquid";
-                    font-size : 5vw;
+                    font-size : 10vw;
                     white-space : nowrap;
-                    # margin-bottom : -1vw;
                     font-weight : 700;
-                    # text-shadow: 4px 5px 5px #D9D9D9;
-                    # color : #FFFFFF;
-                    # -webkit-text-stroke: 0.01vw #FECCBE;
+                    line-height : 1.2;
                 }}
                 /* 메인 메뉴 관련 */
                 .Main_menu {{
@@ -41,8 +39,6 @@ st.markdown(f'''
                 }}
                 .Main_menu > a > img {{
                     width : 10vw;
-                    # margin-bottom : -1vw;
-                    margin-top : -2vw;
                 }}
                 .Main_menu > a > img:hover {{
                     transform : scale(1.1);
@@ -55,28 +51,30 @@ st.markdown(f'''
                     flex-direction : column;
                     justify-content : center;
                     align-items : center;
+                    padding-top : 4vw;
                 }}
                 .Main_notice p {{
                     white-space : nowrap;
                     text-align : center;
-                    margin-bottom : 0;
-                    margin-top : 0;
                     font-weight : 400;
                     color : #808080;
-                    font-size : 1.25vw;
+                    font-size : 3vw;
                     font-family : 'Nanum Pen Script';
+                    line-height : 1.2;
+                    margin-bottom : 0;
                 }}
                 /* 메인 링크관련 */
+                .Main_link_menu_name {{
+                    margin-top : 5vw;
+                }}
                 .Main_link_menu_name p {{
                     white-space : nowrap;
                     text-align : center;
                     margin-bottom : 0;
-                    margin-top : 0;
                     font-family : 'Nanumsquare';
                     font-weight : 700;
                     color : #000000;
                     font-size : 1.5vw;
-                    margin-top : 2vw;
                 }}
                 .Main_link {{
                     display : flex;

@@ -151,7 +151,7 @@ def setting_session_state():
             rows = conn.execute(query, headers=1)
             rows = rows.fetchall()
             return rows
-        sheet_url = st.secrets["private_gsheets_url"]
+        sheet_url = st.secrets["content_info_url"]
         rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
         st.session_state['CONTENT_INFO'] = pd.DataFrame(rows)

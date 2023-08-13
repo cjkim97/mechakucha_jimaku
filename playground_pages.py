@@ -215,7 +215,7 @@ def KEI_RECSYS():
                 # target_data 제작
                 train_data = pd.DataFrame(st.session_state.kei_filmo_info['score'].values, index = st.session_state.kei_filmo_info['title'].values).T
                 train = train_data.values
-                pred = recommend(train)
+                pred = recommend(train,len(st.session_state.kei_filmo_info['score'].values) )
                 # 결과
                 pred_df = pd.DataFrame(pred, columns = train_data.columns)
                 pred_df = pred_df.T.sort_values(by=0,ascending=False).reset_index()

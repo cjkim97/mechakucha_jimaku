@@ -278,7 +278,7 @@ def initialize_playground_session():
     st.session_state.input_over = False
 
 # 예측 함수
-def recommend(target, user_size = 1, film_size = 122, hidden_size = 5, steps = 1000, learning_rate = 0.01, r_lambda = 0.1):
+def recommend(target, film_size, user_size = 1, hidden_size = 5, steps = 1000, learning_rate = 0.01, r_lambda = 0.1):
     # random score, kei hidden
     score_hidden = np.random.normal(scale=1, size=(user_size, hidden_size))
     kei_hidden = np.random.normal(scale=1, size = (film_size, hidden_size))

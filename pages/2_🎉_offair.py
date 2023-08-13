@@ -3,7 +3,7 @@ import streamlit as st
 import base64
 from glob import glob
 
-from utils import set_background_main, set_sidebar, setting_session_state
+from utils import set_background_main, set_sidebar, setting_session_state, initialize_playground_session
 
 # 기본 배경 설정
 set_background_main()
@@ -13,6 +13,9 @@ set_sidebar()
 
 # 초기값 설정
 setting_session_state()
+
+# playground 벗어났을 경우를 대비하여 초기화
+initialize_playground_session()
 
 # 요소 디자인
 st.markdown(f'''
@@ -99,10 +102,11 @@ st.markdown(f'''
 
 ## 최신순/과거순 정렬
 ## 페이지 타이틀
-st.markdown(f'''
-            <div class="page_title">
-                <p> 🎉작업 종료된 작품들 </p> 
-            </div>''', unsafe_allow_html=True)
+st.title('🎉작업 종료된 작품들')
+# st.markdown(f'''
+#             <div class="page_title">
+#                 <p> 🎉작업 종료된 작품들 </p> 
+#             </div>''', unsafe_allow_html=True)
 sort1, sort2 = st.columns([1,1])
 NEW = sort1.button('최신순')
 OLD = sort2.button('과거순') #default

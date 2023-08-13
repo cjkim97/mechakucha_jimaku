@@ -1,10 +1,9 @@
 import streamlit as st
-import pandas as pd
-from glob import glob
 
 from utils import set_background_main, set_sidebar
 from utils import get_image_base64
 from utils import setting_session_state
+from utils import initialize_playground_session
 
 # 기본 배경 설정
 set_background_main()
@@ -12,32 +11,43 @@ set_background_main()
 # sidebar 설정
 set_sidebar()
 
+# 초기값 설정
 setting_session_state()
 
+# playground 벗어났을 경우를 대비하여 초기화
+initialize_playground_session()
 
 # 요소 디자인
 st.markdown(f'''
             <style> 
                 /* 메인 타이틀 관련 */
-                .Main_title {{
+                # .Main_title {{
+                #     display : flex;
+                #     justify-content : center;
+                #     align-items : center;
+                #     padding-top : 0;
+                # }}
+                # .Main_title span {{
+                #     font-family : 'Nanumsquare';
+                #     font-size : 2vw;
+                #     font-weight : 700;
+                #     white-space : nowrap;
+                #     color : #808080;
+                # }}
+                # #title_name{{
+                #     font-family: "InkLipquid";
+                #     font-size : 10vw;
+                #     white-space : nowrap;
+                #     font-weight : 700;
+                #     line-height : 1.2;
+                # }}
+                [class="css-10trblm e1nzilvr0"] {{
                     display : flex;
                     justify-content : center;
-                    align-items : center;
-                    padding-top : 0;
+                    font-size : 8vw;
                 }}
-                .Main_title span {{
-                    font-family : 'Nanumsquare';
-                    font-size : 2vw;
-                    font-weight : 700;
-                    white-space : nowrap;
-                    color : #808080;
-                }}
-                #title_name{{
-                    font-family: "InkLipquid";
-                    font-size : 10vw;
-                    white-space : nowrap;
-                    font-weight : 700;
-                    line-height : 1.2;
+                h1 > div > a {{
+                    display : none !important;
                 }}
                 /* 메인 메뉴 관련 */
                 .Main_menu {{
@@ -98,10 +108,11 @@ st.markdown(f'''
 
 # 요소 노출
 # Maintitle
-st.markdown('''
-            <div class = "Main_title">
-                <p id = "title_name"> 엉터리 자막 보관소 </p><span>v0.2</span>
-            </div>''', unsafe_allow_html=True)
+st.title('엉터리 자막 보관소 v1.2')
+# st.markdown('''
+#             <div class = "Main_title">
+#                 <p id = "title_name"> 엉터리 자막 보관소 </p><span>v0.2</span>
+#             </div>''', unsafe_allow_html=True)
 
 # 자막 메뉴로 이동
 onair_icon = get_image_base64('./static/icons/onair.png')
@@ -117,14 +128,6 @@ st.markdown(f'''
             </div>''', unsafe_allow_html=True )
 
 # 주요 공지사항
-# st.markdown(f'''
-#             <div class = "Main_notice">
-#                 <p> 📌 상업적 이용 금지 📌 </p>
-#                 <p> 📌 출처 삭제 금지 및 배포 지양 📌 </p>
-#                 <p> 📌 의역/오역/맞춤법 오류 겁나 많음 📌 </p>
-#                 <p> 📌 자막 싱크는 대부분 TVER(추출) 기준 📌 </p>
-#                 <p> 📌 그저 공부용이니 허접해도 양해부탁드립니다 :) 📌 </p>
-#             </div>''', unsafe_allow_html=True)
 st.markdown(f'''
             <div class = "Main_notice"> 
                 <p style='font-size : 0.75vw; font-family : "Nanumsquare"; '> ※ PC 사용을 권장합니다 ※</p>

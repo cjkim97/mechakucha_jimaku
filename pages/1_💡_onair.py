@@ -4,7 +4,7 @@ import base64
 from datetime import datetime, timedelta
 from glob import glob
 
-from utils import set_background_main, set_sidebar, setting_session_state
+from utils import set_background_main, set_sidebar, setting_session_state, initialize_playground_session
 
 # 기본 배경 설정
 set_background_main()
@@ -14,6 +14,8 @@ set_sidebar()
 
 # 초기값 설정
 setting_session_state()
+# playground 벗어났을 경우를 대비하여 초기화
+initialize_playground_session()
 
 # 요소 디자인
 st.markdown(f'''
@@ -45,15 +47,15 @@ st.markdown(f'''
                     transition : .5s;
                 }}
                 /* 최근 업데이트 내역 */
-                .update_log {{              
-                    background : #F2F2F2;
-                    border-radius : 10px;
-                    margin-left : 5vw;
-                    padding-right : 2vw;
-                    margin-top : 1vw;
-                    height : 20vw;
-                    width : 80vw;
-                }}
+                # .update_log {{              
+                #     background : #F2F2F2;
+                #     border-radius : 10px;
+                #     margin-left : 5vw;
+                #     padding-right : 2vw;
+                #     margin-top : 1vw;
+                #     height : 20vw;
+                #     width : 80vw;
+                # }}
                 .update_log p{{
                     font-size : 1rem;
                 }}
@@ -62,10 +64,11 @@ st.markdown(f'''
 
 # 요소 노출
 ## 페이지 타이틀
-st.markdown(f'''
-            <div class="page_title">
-                <p> 💡현재 작업 중인 작품들 </p> 
-            </div>''', unsafe_allow_html=True)
+st.title("💡현재 작업 중인 작품들")
+# st.markdown(f'''
+#             <div class="page_title">
+#                 <p> 💡현재 작업 중인 작품들 </p> 
+#             </div>''', unsafe_allow_html=True)
 
 ## 현재 작업 중인 작품 정보
 ONAIR_DATA = st.session_state.CONTENT_INFO[st.session_state['CONTENT_INFO']['onair']=='Y'].copy()
@@ -95,14 +98,15 @@ st.markdown(ONAIR_HTML, unsafe_allow_html=True)
 
 ## 최근 업데이트 내역
 ### 최근 1주일 내 업데이트 내역만 반영하려고 함
-st.markdown(f'''
-            <div class="page_title">
-                <p> 📌최근 업데이트 내역</p> 
-            </div>''', unsafe_allow_html=True)
+st.title("📌최근 업데이트 내역")
+# st.markdown(f'''
+#             <div class="page_title">
+#                 <p> 📌최근 업데이트 내역</p> 
+#             </div>''', unsafe_allow_html=True)
 
 update_log_html = ''
 for log in RECENT_UPDATE:
-    update_log_html += f'<p>{log[0]}  ·······  {log[1]} {log[2]}화 🆕<\p>'
+    update_log_html += f'<p>{log[0]}  ·······  {log[1]} {int(log[2])}화 🆕<\p>'
 
 if update_log_html : 
     recent_log = f'''<div class="update_log">{update_log_html}</div>'''

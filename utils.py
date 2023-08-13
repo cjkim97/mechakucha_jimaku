@@ -258,7 +258,11 @@ def setting_session_state():
         st.session_state.messages = []
 
     if 'kei_icon' not in st.session_state:
+        # 로컬일때는 custom image가 적용되지만
         st.session_state.kei_icon = Image.open('./static/icons/kei_recsys_icon.png')
+
+        # Streamlit Cloud 에서는 적용되지 않는다.. -> 깃에 올라간 이미지의 주소를 넣어주면 됨
+        st.session_state.kei_icon = "https://raw.githubusercontent.com/cjkim97/mechakucha_jimaku/main/static/icons/kei_recsys_icon.png"
     
     if 'user_icon' not in st.session_state:
         st.session_state.user_icon = '💙'

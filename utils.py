@@ -110,7 +110,6 @@ def set_background_playground():
     st.markdown(f'''
                 <style>
                     /* 웹폰트 불러오기 */
-                    @import url('http://www.openhiun.com/hangul/nanumbarungothic.css');
                     @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
                     @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
                     .nanumpenscript * {{
@@ -121,6 +120,30 @@ def set_background_playground():
                         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
                         font-weight: normal;
                         font-style: normal;
+                    }}
+                    @font-face {{
+                        font-family: 'NanumBarunGothic';
+                        font-style: normal;
+                        font-weight: 400;
+                        src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+                        src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+                    }}
+                    @font-face {{
+                        font-family: 'NanumBarunGothic';
+                        font-style: normal;
+                        font-weight: 700;
+                        src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot');
+                        src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf') format('truetype')
+                    }}
+                    @font-face {{
+                        font-family: 'NanumBarunGothic';
+                        font-style: normal;
+                        font-weight: 300;
+                        src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
+                        src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
+                    }}
+                    .nanumbarungothic * {{
+                        font-family: 'NanumBarunGothic', sans-serif;
                     }}
                     /* 페이지 타이틀 */
                     h1 {{
@@ -179,7 +202,7 @@ def set_sidebar():
                     [data-testid="stSidebar"] ul {{
                         padding-top : 15rem;
                         max-height : 100vh !important;
-                        height : 90vh !important;
+                        height : 80vh !important;
                         # border : hidden;
                         border-bottom-style : none;
                     }}

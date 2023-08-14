@@ -55,45 +55,56 @@ st.markdown(f'''
                     transition : .5s;
                 }}
                 /* 정렬 버튼 디자인 */
-                [data-testid="stHorizontalBlock"] {{
-                    gap : 0;
-                    padding-left : 10vw;
-                    padding-right : 10vw;
-                    display : flex;
-                    align-items : flex-end;
-                    justify-content : center;
-                    flex-basis: min-content;
-                }}
-                [class='row-widget stButton']{{
-                    display : flex;
-                    justify-content : center;
-                }}
-                [class='row-widget stButton'] > button{{
-                    background : #FFFFFF;
-                    border : hidden;
-                    display : flex;
-                    align-items : flex-end;
-                }}
-                [class='row-widget stButton'] > button > div {{
-                    color : #989898;
+                # [data-testid="stHorizontalBlock"] {{
+                #     gap : 0;
+                #     padding-left : 10vw;
+                #     padding-right : 10vw;
+                #     display : flex;
+                #     align-items : flex-end;
+                #     justify-content : center;
+                #     flex-basis: min-content;
+                # }}
+                # [class='row-widget stButton']{{
+                #     display : flex;
+                #     justify-content : center;
+                # }}
+                # [class='row-widget stButton'] > button{{
+                #     background : #FFFFFF;
+                #     border : hidden;
+                #     display : flex;
+                #     align-items : flex-end;
+                # }}
+                # [class='row-widget stButton'] > button > div {{
+                #     color : #989898;
+                #     font-family : 'Nanumsquare';
+                # }}
+                # [class='row-widget stButton'] > button > div > p {{
+                #     font-size : 1rem;
+                # }}
+                # [class='row-widget stButton'] > button > div:hover {{
+                #     color : #000000;
+                #     font-family : 'Nanumsquare';
+                # }}
+                # [class='row-widget stButton'] > button:hover {{
+                #     transform : scale(1.1);
+                #     transition : .5s;
+                # }}
+                # [class='row-widget stButton'] > button:active {{
+                #     background : #FFFFFF;
+                # }}
+                # .css-1np2sqp{{
+                #     width : 10px !important;
+                # }}
+                /* 필터링 및 정렬 선택 버튼 */
+                [data-baseweb="radio"] div {{
                     font-family : 'Nanumsquare';
                 }}
-                [class='row-widget stButton'] > button > div > p {{
-                    font-size : 1.5vw;
-                }}
-                [class='row-widget stButton'] > button > div:hover {{
-                    color : #000000;
+                [class="row-widget stRadio"] p {{
                     font-family : 'Nanumsquare';
+                    font-weight : 700;
                 }}
-                [class='row-widget stButton'] > button:hover {{
-                    transform : scale(1.1);
-                    transition : .5s;
-                }}
-                [class='row-widget stButton'] > button:active {{
-                    background : #FFFFFF;
-                }}
-                .css-1np2sqp{{
-                    width : 10px !important;
+                [class="row-widget stRadio"] > label {{
+                    padding-top : 10px;
                 }}
             
             </style>''',unsafe_allow_html=True)
@@ -107,16 +118,24 @@ st.title('🎉작업 종료된 작품들')
 #             <div class="page_title">
 #                 <p> 🎉작업 종료된 작품들 </p> 
 #             </div>''', unsafe_allow_html=True)
-sort1, sort2 = st.columns([1,1])
-NEW = sort1.button('최신순')
-OLD = sort2.button('과거순') #default
 ## 현재 작업 중인 작품 정보
 OFFAIR_DATA = st.session_state.CONTENT_INFO[st.session_state['CONTENT_INFO']['onair']=='N'].copy()
-SORTED_DATA = OFFAIR_DATA
+filtering = st.radio('📌필터링', options=['전체보기', '완결작만보기'],label_visibility='visible', horizontal=True)
+sorting = st.radio('📌정렬', options=['최신순', '과거순'],label_visibility='visible', horizontal=True)
+
+if filtering == '완결작만보기':
+    SORTED_DATA = OFFAIR_DATA[OFFAIR_DATA['is_full']=='Y']
+else : 
+    SORTED_DATA = OFFAIR_DATA
+
+# sort1, sort2 = st.columns([1,1])
+# NEW = sort1.button('최신순')
+# OLD = sort2.button('과거순') #default
 ### 이미지 리스트 html화 하기
 content_list_html = []
-if NEW : 
-    SORTED_DATA = OFFAIR_DATA.iloc[::-1,:]
+# if NEW : 
+if sorting == '최신순':
+    SORTED_DATA = SORTED_DATA.iloc[::-1,:]
 
 for content in SORTED_DATA[['content_id', 'content_kr', 'url']].values:
     content_id, content_kr, content_url = content

@@ -108,7 +108,7 @@ st.markdown(f'''
 
 # 요소 노출
 # Maintitle
-st.title('엉터리 자막 보관소 v1.2')
+st.title('엉터리 자막 보관소 v2.3.1')
 # st.markdown('''
 #             <div class = "Main_title">
 #                 <p id = "title_name"> 엉터리 자막 보관소 </p><span>v0.2</span>
@@ -130,7 +130,7 @@ st.markdown(f'''
 # 주요 공지사항
 st.markdown(f'''
             <div class = "Main_notice"> 
-                <p style='font-size : 0.75vw; font-family : "Nanumsquare"; '> ※ PC 사용을 권장합니다 ※</p>
+                <p style='font-size : 0.8vw; font-family : "Nanumsquare"; '> ※ PC 사용을 권장합니다 ※</p>
                 <p> <br>공부용으로 만들었던 자막을 기록하는 장소이자,<br>끄적대며 만든 것도 남겨두는 곳</p>
                 
             </div>''', unsafe_allow_html=True)

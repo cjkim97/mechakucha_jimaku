@@ -207,7 +207,7 @@ def set_sidebar():
                         border-bottom-style : none;
                     }}
                     [data-testid="stSidebar"] span{{
-                        font-size : 20px;
+                        font-size : 1rem;
 
                     }}
                     [data-testid="stSidebarNav"] a:visited {{

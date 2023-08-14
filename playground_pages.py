@@ -65,7 +65,7 @@ def MAIN():
                 </div>''', unsafe_allow_html=True)
 
     ## 필모추천기
-    clean_tver_lyric = st.button('#TVER 일자막 정리하기(v2.2예정)')
+    clean_tver_lyric = st.button('#TVER 일자막 정리하기(개발 예정)')
     if clean_tver_lyric : 
         st.session_state['playground_page'] =  'CLEAN_LYRIC'
         st.experimental_rerun()

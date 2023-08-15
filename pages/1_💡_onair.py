@@ -83,7 +83,7 @@ for content in ONAIR_DATA[['content_id', 'content_kr', 'release_date', 'hashtag'
     # 최근 1주일 내 업데이트인 경우 가져오기~
     if datetime.today() - datetime(int(y), int(m), int(d)) < timedelta(days=7):
         RECENT_UPDATE.append([content_kr, update_date, last_episode])
-        content_kr = '🆕' += content_kr
+        content_kr = '🆕' + content_kr
     
     with open(f'./static/images/{content_id}.gif', 'rb') as f:
         thumbnail = f.read()

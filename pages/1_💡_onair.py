@@ -58,6 +58,7 @@ st.markdown(f'''
                 # }}
                 .update_log p{{
                     font-size : 1rem;
+                    font-family : 'NanumBarunGothic';
                 }}
 
             </style>''',unsafe_allow_html=True)
@@ -82,6 +83,7 @@ for content in ONAIR_DATA[['content_id', 'content_kr', 'release_date', 'hashtag'
     # 최근 1주일 내 업데이트인 경우 가져오기~
     if datetime.today() - datetime(int(y), int(m), int(d)) < timedelta(days=7):
         RECENT_UPDATE.append([content_kr, update_date, last_episode])
+        content_kr = '🆕' += content_kr
     
     with open(f'./static/images/{content_id}.gif', 'rb') as f:
         thumbnail = f.read()
@@ -106,7 +108,7 @@ st.title("📌최근 업데이트 내역")
 
 update_log_html = ''
 for log in RECENT_UPDATE:
-    update_log_html += f'<p>{log[0]}  ·······  {log[1]} {int(log[2])}화 🆕<\p>'
+    update_log_html += f'<p>{log[0]}  ·······  {log[1]} {int(log[2])}화 🆕</p>'
 
 if update_log_html : 
     recent_log = f'''<div class="update_log">{update_log_html}</div>'''

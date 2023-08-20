@@ -114,10 +114,7 @@ st.markdown(f'''
 ## 최신순/과거순 정렬
 ## 페이지 타이틀
 st.title('🎉작업 종료된 작품들')
-# st.markdown(f'''
-#             <div class="page_title">
-#                 <p> 🎉작업 종료된 작품들 </p> 
-#             </div>''', unsafe_allow_html=True)
+
 ## 현재 작업 중인 작품 정보
 OFFAIR_DATA = st.session_state.CONTENT_INFO[st.session_state['CONTENT_INFO']['onair']=='N'].copy()
 filtering = st.radio('📌필터링', options=['전체보기', '완결작만보기'],label_visibility='visible', horizontal=True)
@@ -135,7 +132,8 @@ else :
 content_list_html = []
 # if NEW : 
 if sorting == '최신순':
-    SORTED_DATA = SORTED_DATA.iloc[::-1,:]
+    # SORTED_DATA = SORTED_DATA.iloc[::-1,:]
+    SORTED_DATA = SORTED_DATA.sort_values(by='update_date', ascending=False)
 
 for content in SORTED_DATA[['content_id', 'content_kr', 'url']].values:
     content_id, content_kr, content_url = content
